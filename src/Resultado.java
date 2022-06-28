@@ -14,6 +14,9 @@ public class Resultado {
     private int Comentarios = 0;
     private int LineasVacias = 0;
     private int Clases = 0;
+
+    public Resultado() {
+    }
     
     public int getLineas() {
         return Lineas;
@@ -21,6 +24,38 @@ public class Resultado {
 
     public void setLineas(int Lineas) {
         this.Lineas = Lineas;
+    }
+
+    public int getMetodos() {
+        return Metodos;
+    }
+
+    public void setMetodos(int Metodos) {
+        this.Metodos = Metodos;
+    }
+
+    public int getComentarios() {
+        return Comentarios;
+    }
+
+    public void setComentarios(int Comentarios) {
+        this.Comentarios = Comentarios;
+    }
+
+    public int getLineasVacias() {
+        return LineasVacias;
+    }
+
+    public void setLineasVacias(int LineasVacias) {
+        this.LineasVacias = LineasVacias;
+    }
+
+    public int getClases() {
+        return Clases;
+    }
+
+    public void setClases(int Clases) {
+        this.Clases = Clases;
     }
     
     

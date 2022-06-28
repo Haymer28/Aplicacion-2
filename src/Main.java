@@ -1,4 +1,5 @@
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /*
@@ -16,17 +17,11 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         
         Contador cn = new Contador();
         
-        System.out.println("Ingrese la ruta");
-        Scanner sc = new Scanner(System.in);
-        String ruta = sc.nextLine();
-        if(!ruta.isEmpty()){
-        }else{
-            System.out.println("erro");
-        }
+        cn.leerArchivo("C:\\xampp\\htdocs\\Aplicacion-1\\src\\aplicacion\\pkg1\\Nodo.java");
+        cn.mostrar();
     }
-    
 }
