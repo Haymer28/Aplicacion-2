@@ -14,10 +14,46 @@ public class Resultado {
     private int Comentarios = 0;
     private int LineasVacias = 0;
     private int Clases = 0;
+    private int libreria = 0;
+    private int main = 0;
+    private int diferencia = 0;
+    private int total = 0;
 
     public Resultado() {
     }
-    
+
+    public int getLibreria() {
+        return libreria;
+    }
+
+    public void setLibreria(int libreria) {
+        this.libreria = libreria;
+    }
+
+    public int getMain() {
+        return main;
+    }
+
+    public void setMain(int main) {
+        this.main = main;
+    }
+
+    public int getDiferencia() {
+        return diferencia;
+    }
+
+    public void setDiferencia(int diferencia) {
+        this.diferencia = diferencia;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
     public int getLineas() {
         return Lineas;
     }

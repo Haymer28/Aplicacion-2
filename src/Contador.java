@@ -8,20 +8,25 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    To change this license header, choose License Headers in Project Properties.    
+    To change this template file, choose Tools | Templates  
+    and open the template in the editor.
  */
-/**
- *
- * @author SAMSUNG-PC
+
+/*
+ 
+  @author SAMSUNG-PC
  */
 public class Contador {
 
     Resultado rs = new Resultado();
-    private int lineas = 0;
-    private int metodos = 0;
-    private int clases = 0;
+    private int linea = 0;
+    private int metodo = 0;
+    private int clase = 0;
+    private int comentario = 0;
+    private int lineasVacia = 0;
+    private int libreria = 0;
+    private int main = 0;
     String line = "";
 
     public void leerArchivo(String ruta) {
@@ -36,6 +41,11 @@ public class Contador {
                 lineasGlobales(trim);
                 contadorMetodos(trim);
                 contadorClases(trim);
+                contadorLibrerias(trim);
+                contadorMain(trim);
+                contadorComentarios(trim);
+                contadorLineasVacias(trim);
+                lineasReales(trim);
             }
 
         } catch (Exception e) {
@@ -44,8 +54,8 @@ public class Contador {
     }
 
     public void lineasGlobales(String archivo) {
-        lineas++;
-        rs.setLineas(lineas);
+        linea++;
+        rs.setLineas(linea);
     }
 
     public void contadorMetodos(String archivo) {
@@ -61,27 +71,70 @@ public class Contador {
         Matcher mo = po.matcher(archivo);
 
         if (m.find()) {
-            metodos++;
+            metodo++;
         }
         if (mo.find()) {
-            metodos++;
+            metodo++;
         }
 
-        rs.setMetodos(metodos);
+        rs.setMetodos(metodo);
     }
 
     public void contadorClases(String archivo) {
         if (archivo.contains("public class")) {
-            clases++;
-            rs.setClases(clases);
+            clase++;
+            rs.setClases(clase);
         }
+    }
+    
+    public void contadorLibrerias(String archivo){
+         if (archivo.contains("import")) {
+            libreria++;
+            rs.setLibreria(libreria);
+        }
+    }
+    
+    public void contadorMain(String archivo){
+        if (archivo.contains("public static void")){
+            main++;
+            rs.setMain(main);
+        }
+    }
+    
+    public void contadorComentarios(String archivo){
+        if (archivo.contains("/")|| archivo.contains("*")){
+            comentario++;
+            rs.setComentarios(comentario);
+        }
+    }
+    
+    public void contadorLineasVacias(String archivo){
+        if (archivo.isEmpty()){
+            lineasVacia++;
+            rs.setLineasVacias(lineasVacia);
+        }
+    }
+    
+    public void lineasReales(String archivo){
+        rs.setClases(clase);
+        rs.setLineasVacias(lineasVacia);
+        rs.setLibreria(libreria);
+        rs.setMain(main);
+        rs.setLineas(linea);
+        
+        int noReales = (clase + lineasVacia + libreria + main);
+        rs.setDiferencia(noReales);
+        
+        int reales = (linea - noReales);
+        rs.setTotal(reales);
     }
 
     public void mostrar() {
         System.out.println("Lineas globales " + rs.getLineas());
         System.out.println("Metodos: " + rs.getMetodos());
-        System.out.println("Clases: " + rs.getClases());
+        System.out.println("Reales " + rs.getTotal());
     }
+    
 
 }
 //if|for|while|(\}\s*catch)|else

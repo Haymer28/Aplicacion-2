@@ -21,7 +21,19 @@ public class Main {
         
         Contador cn = new Contador();
         
-        cn.leerArchivo("C:\\xampp\\htdocs\\Aplicacion-1\\src\\aplicacion\\pkg1\\Nodo.java");
+        System.out.println("Contador.java");
+        cn.leerArchivo("C:\\xampp\\htdocs\\Aplicacion-2\\src\\Contador.java");
         cn.mostrar();
+        
+        
+        System.out.println("Main.java");
+        cn.leerArchivo("C:\\xampp\\htdocs\\Aplicacion-2\\src\\Main.java");
+        cn.mostrar();
+        
+        
+        System.out.println("Resultado.java");
+        cn.leerArchivo("C:\\xampp\\htdocs\\Aplicacion-2\\src\\Resultado.java");
+        cn.mostrar();
+        
     }
 }
