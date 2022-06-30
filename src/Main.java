@@ -43,7 +43,9 @@ public class Main {
             //mostrará de una forma ordenada en una lista los datos que recolecte
             //de la clase Operaciones
             System.out.println();
-            System.out.printf("[--------Nombre--------][-LineasGlobales-][-Metodos-][-LineasReales-]%n");
+            System.out.printf("[--------Nombre--------][-LineasGlobales-][-Metodos-]"
+                    + "[-Clases-][-Importaciones-][-Main-][-Comentarios-][-LineasVacias-]"
+                    + "[-LineasReales-]%n");
             cn.leerArchivo(archivo);
             //en caso de que la ruta sea incorrecta mandará este mensaje
             //en caso de que algo falle mandará este mensaje

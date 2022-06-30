@@ -89,7 +89,7 @@ public class Contador {
         }
         rs.setClases(cont);
             //System.out.println("aaaaaaaaaaaaaaaaaaaaaaa b " + rs.getClases());
-        System.out.printf("[%16s ]", rs.getClases());
+        System.out.printf("[%5s ]", rs.getClases());
 
     }
 
