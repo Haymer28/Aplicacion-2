@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
     and open the template in the editor.
  */
 
-/*
+ /*
  
   @author SAMSUNG-PC
  */
@@ -28,103 +28,141 @@ public class Contador {
     private int libreria = 0;
     private int main = 0;
     String line = "";
+    private int cantArchivos;
 
-    public void leerArchivo(String ruta) {
-
-        try {
-            //BufferedReader es una clase de Java para leer el texto de una secuencia de entrada (como un archivo)
-            BufferedReader bf = new BufferedReader(new FileReader(ruta));
-            //bread toma el valor de bf.readLine que es método que  lee todos los caracteres
-            while ((line = bf.readLine()) != null) {
-                String trim = line.trim();
-                //llamamos los metodos y les pasamos el String por parametro
-                lineasGlobales(trim);
-                contadorMetodos(trim);
-                contadorClases(trim);
-                contadorLibrerias(trim);
-                contadorMain(trim);
-                contadorComentarios(trim);
-                contadorLineasVacias(trim);
-                lineasReales(trim);
+    public void leerArchivo(String ruta) throws FileNotFoundException {
+        File directorio = new File(ruta);
+        String[] archivos = directorio.list();
+        //
+        cantArchivos = archivos.length;
+        //
+        for (int i = 0; i < cantArchivos; i++) {
+            try {
+                System.out.printf("[%21s ]", archivos[i]);
+                BufferedReader c = new BufferedReader(new FileReader(ruta + archivos[i]));
+                contadorMetodos(c);
+//                BufferedReader lb = new BufferedReader(new FileReader(ruta + archivos[i]));
+//                lineasGlobales(lb);
+//                BufferedReader cc = new BufferedReader(new FileReader(ruta + archivos[i]));
+//                contadorClases(cc);
+//                BufferedReader cl = new BufferedReader(new FileReader(ruta + archivos[i]));
+//                contadorLibrerias(cl);
+//                BufferedReader cm = new BufferedReader(new FileReader(ruta + archivos[i]));
+//                contadorMain(cm);
+//                BufferedReader ct = new BufferedReader(new FileReader(ruta + archivos[i]));
+//                contadorComentarios(ct);
+//                BufferedReader cv = new BufferedReader(new FileReader(ruta + archivos[i]));
+//                contadorLineasVacias(cv);
+//                BufferedReader lr = new BufferedReader(new FileReader(ruta + archivos[i]));
+//                lineasReales(lr);
+            } catch (Exception e) {
+                System.out.println("no se encontro archivo");
             }
-
-        } catch (Exception e) {
-            System.err.println("no se encontro archivos");
         }
     }
-
-    public void lineasGlobales(String archivo) {
-        linea++;
-        rs.setLineas(linea);
-    }
-
-    public void contadorMetodos(String archivo) {
-//        if (archivo.contains("public static")||archivo.contains("public void")||archivo.contains("public int")
-//                ||archivo.contains("public double")||archivo.contains("public boolean")||archivo.contains("public String")
-//                ||archivo.contains("if")||archivo.contains("for")||archivo.contains("while")||archivo.contains("for")
-//                ||archivo.contains("while")||archivo.contains("catch")||archivo.contains("else")
-//                ||archivo.contains("set")) {
+    
+     public void contadorMetodos(BufferedReader ruta) throws IOException {
+        String fila = null;
+        int cont = 0;
+        while ((fila = ruta.readLine()) != null) {
+            
         Pattern p = Pattern.compile("(public)\\s*(static|void|int|double|boolean|String)*\\s+\\w+\\(");
-        Matcher m = p.matcher(archivo);
+        Matcher m = p.matcher(fila);
 
         Pattern po = Pattern.compile("(public)\\s*(static|void|int|double|boolean|String)\\s*(get|set)\\w*\\(");
-        Matcher mo = po.matcher(archivo);
+        Matcher mo = po.matcher(fila);
 
         if (m.find()) {
-            metodo++;
+            cont++;
         }
         if (mo.find()) {
-            metodo++;
+            cont++;
         }
-
-        rs.setMetodos(metodo);
+        rs.setMetodos(cont);
+        }
+        System.out.printf("[%16]%n"+ rs.getMetodos());
+    }
+    
+    public void lineasGlobales(BufferedReader ruta) throws IOException {
+        String linea = null;
+        int cont = 0;
+        while ((linea = ruta.readLine()) != null) {
+            cont++;
+            rs.setLineas(cont);
+        }
+        System.out.printf("[%16s ]%n", rs.getLineas());
     }
 
-    public void contadorClases(String archivo) {
-        if (archivo.contains("public class")) {
+   
+
+    public void contadorClases(BufferedReader ruta) throws IOException {
+        String linea = null;
+        while ((linea = ruta.readLine()) != null) {
+        if (linea.contains("public class")) {
             clase++;
             rs.setClases(clase);
         }
+        }
+        System.out.printf("[%16s ]%n", rs.getClases());
     }
-    
-    public void contadorLibrerias(String archivo){
-         if (archivo.contains("import")) {
+
+    public void contadorLibrerias(BufferedReader ruta) throws IOException {
+        String linea = null;
+        while ((linea = ruta.readLine()) != null) {
+        if (linea.contains("import")) {
             libreria++;
             rs.setLibreria(libreria);
         }
+        }
+        System.out.printf("[%16]%n", rs.getLibreria());
     }
-    
-    public void contadorMain(String archivo){
-        if (archivo.contains("public static void")){
+
+    public void contadorMain(BufferedReader ruta) throws IOException {
+        String linea = null;
+        while ((linea = ruta.readLine()) != null) {
+        if (linea.contains("public static void")) {
             main++;
             rs.setMain(main);
         }
+        }
+        System.out.printf("[%16]%n", rs.getMain());
+        
     }
-    
-    public void contadorComentarios(String archivo){
-        if (archivo.contains("/")|| archivo.contains("*")){
+
+    public void contadorComentarios(BufferedReader ruta) throws IOException {
+        String linea = null;
+        while ((linea = ruta.readLine()) != null) {
+        if (linea.contains("/") || linea.contains("*")) {
             comentario++;
             rs.setComentarios(comentario);
         }
+        }
+        System.out.printf("[%16]%n", rs.getComentarios());
+        
     }
-    
-    public void contadorLineasVacias(String archivo){
-        if (archivo.isEmpty()){
+
+    public void contadorLineasVacias(BufferedReader ruta) throws IOException {
+        String linea = null;
+        while ((linea = ruta.readLine()) != null) {
+        if (linea.isEmpty()) {
             lineasVacia++;
             rs.setLineasVacias(lineasVacia);
         }
+        }
+        System.out.printf("[%16]%n", rs.getLineasVacias());
+        
     }
-    
-    public void lineasReales(String archivo){
+
+    public void lineasReales(BufferedReader ruta) {
         rs.setClases(clase);
         rs.setLineasVacias(lineasVacia);
         rs.setLibreria(libreria);
         rs.setMain(main);
         rs.setLineas(linea);
-        
+
         int noReales = (clase + lineasVacia + libreria + main);
         rs.setDiferencia(noReales);
-        
+
         int reales = (linea - noReales);
         rs.setTotal(reales);
     }
@@ -134,7 +172,6 @@ public class Contador {
         System.out.println("Metodos: " + rs.getMetodos());
         System.out.println("Reales " + rs.getTotal());
     }
-    
 
 }
 //if|for|while|(\}\s*catch)|else
