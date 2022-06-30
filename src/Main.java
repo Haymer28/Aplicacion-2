@@ -30,7 +30,7 @@ public class Main {
             //imprimo un mensaje predefinido
             System.out.println("Adjute todos los archivos del programa en una misma carpeta.");
             System.out.println("Digite la dirección de los archivos:");
-            System.out.println("Ej: C:/programa/x/");
+            System.out.println("Ej: C:/programa/C:/xampp/htdocs/Aplicacion-2/src//");
             System.out.println("------------------------------");
             System.out.print("Digite la ruta: ");
 
@@ -40,16 +40,12 @@ public class Main {
             String archivo = br.readLine();
 
             //si la ruta termina con el "/" leerá los archivos que encuentre dentro
-            if (archivo.endsWith("/")) {
-                //mostrará de una forma ordenada en una lista los datos que recolecte
-                //de la clase Operaciones
-                System.out.println();
-                System.out.printf("[--------Nombre--------][-LineasGlobales-][-Metodos-][-LineasReales-]%n");
-                cn.leerArchivo(archivo);
-                //en caso de que la ruta sea incorrecta mandará este mensaje
-            } else {
-                System.out.println("La dirección es incorrecta.");
-            }
+            //mostrará de una forma ordenada en una lista los datos que recolecte
+            //de la clase Operaciones
+            System.out.println();
+            System.out.printf("[--------Nombre--------][-LineasGlobales-][-Metodos-][-LineasReales-]%n");
+            cn.leerArchivo(archivo);
+            //en caso de que la ruta sea incorrecta mandará este mensaje
             //en caso de que algo falle mandará este mensaje
         } catch (IOException e) {
             System.out.println("La dirección es incorrecta.");
