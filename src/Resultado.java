@@ -1,14 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author SAMSUNG-PC
+/** *********************************************************
+ ************************************************************
+ ************************************************************
+ *****                                                  *****
+ *****  Name: Programa2                                 *****
+ *****  Description: Conteo de LOC, clases, métodos y   *****
+ *****  comentarios                                     *****
+ *****  Date: 18/06/2022                                *****                                                 ****                                                 *****            
+ ***** @author Carlos Haymer Gonzalez Valencia          *****
+ ************************************************************
+ ************************************************************
+************************************************************/
+
+
+/*
+Clase para los metodos get y set, estos metodos nos ayduaran
+a guardar la informacion de cada método implementado en la
+clase Contador 
  */
 public class Resultado {
+
     private int Lineas = 0;
     private int Metodos = 0;
     private int Comentarios = 0;
@@ -93,7 +104,6 @@ public class Resultado {
     public void setClases(int Clases) {
         this.Clases = Clases;
     }
-    
-    
+
 }
 //
